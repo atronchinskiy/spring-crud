@@ -16,11 +16,11 @@
 <h3>Edit user</h3>
         <form method="post" action='<c:url value="/edit" />' style="display:inline;">
                 ID: ${id}
-                <input type="hidden" name="id" value="${id}"/>
+                <input type="hidden" name="id" value="${user.id}"/>
                 <p></p>
-                FirstName: <input type="text" name="firstName" value="${firstName}"/>
-                LastName: <input type="text" name="lastName" value="${lastName}"/>
-                Email: <input type="text" name="email" value="${email}"/>
+                FirstName: <input type="text" name="firstName" value="${user.firstName}"/>
+                LastName: <input type="text" name="lastName" value="${user.lastName}"/>
+                Email: <input type="text" name="email" value="${user.email}"/>
                 <input type="submit" value="Edit user">
         </form>
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,27 +30,12 @@ public class AdminController {
 
     @RequestMapping(
             value = "admin",
-            params = {"id", "firstName", "lastName", "email"},
-            method = RequestMethod.DELETE)
-    public String adminPageDelete(ModelMap modelMap,
-                                  @RequestParam("id") Long id,
-                                  @RequestParam("firstName") String firstName,
-                                  @RequestParam("lastName") String lastName,
-                                  @RequestParam("email") String email) {
-        userService.deleteUser(new User(id, firstName, lastName, email));
+            params = {"firstName", "lastName", "email"},
+            method = RequestMethod.POST)
+    public String adminPagePost(ModelMap modelMap, @ModelAttribute User user) {
+        userService.addUser(user);
         return "redirect:/admin";
     }
 
-    @RequestMapping(
-            value = "admin",
-            params = {"firstName", "lastName", "email"},
-            method = RequestMethod.POST)
-    public String adminPagePost(ModelMap modelMap,
-                                @RequestParam("firstName") String firstName,
-                                @RequestParam("lastName") String lastName,
-                                @RequestParam("email") String email) {
-        userService.addUser(new User(firstName, lastName, email));
-        return "redirect:/admin";
-    }
 
 }

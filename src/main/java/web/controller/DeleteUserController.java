@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,12 +21,8 @@ public class DeleteUserController {
             value = "delete",
             params = {"id", "firstName", "lastName", "email"},
             method = RequestMethod.POST)
-    public String editPagePost(ModelMap modelMap,
-                               @RequestParam("id") Long id,
-                               @RequestParam("firstName") String firstName,
-                               @RequestParam("lastName") String lastName,
-                               @RequestParam("email") String email) {
-        userService.deleteUser(new User(id, firstName, lastName, email));
+    public String editPagePost(ModelMap modelMap, @ModelAttribute User user) {
+        userService.deleteUser(user);
         return "redirect:/admin";
     }
 }
